@@ -2,3 +2,21 @@
     background-color: Navy;
 }
 
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0; /* Espacio alrededor del texto e ícono */
+}
+
+footer div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fab.fa-instagram {
+    font-size: 2em; /* Ajusta el tamaño del ícono a tu preferencia */
+    margin-left: 10px; /* Espacio a la izquierda del ícono */
+}
+
