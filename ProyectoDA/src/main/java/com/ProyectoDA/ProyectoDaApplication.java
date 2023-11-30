@@ -1,13 +1,13 @@
-package ProyectoFinalG4.demo;
+package com.ProyectoDA;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProyectoFinalG4Application {
+public class ProyectoDaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProyectoFinalG4Application.class, args);
+		SpringApplication.run(ProyectoDaApplication.class, args);
 	}
 
 }
