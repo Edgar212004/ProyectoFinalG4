@@ -1,12 +1,268 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-<html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Venta de todo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link th:href ="@{../static/css/Estilos.css}" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <style>
+            .profile-button {
+                background-color: #1A5276;
+                color: #fff;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+            }
+
+            /* Estilos para el ícono de persona */
+            .profile-icon {
+                margin-right: 8px;
+            }
+
+            /* Estilos para el menú desplegable */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                border-radius: 5px;
+            }
+
+            .dropdown-content a {
+                color: #333;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+            /* Mostrar el menú desplegable al pasar el ratón sobre el botón */
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .banner-container {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                max-width: 600px; /* Ajusta el ancho del banner según tus necesidades */
+                margin: auto;
+            }
+
+            .banner {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .banner img {
+                width: 100%;
+                height: auto;
+            }
+
+            .arrow {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 30px;
+                cursor: pointer;
+                color: #fff;
+                background-color: rgba(0, 0, 0, 0.5);
+                padding: 10px;
+                border: none;
+                outline: none;
+                transition: background-color 0.3s;
+            }
+
+            .arrow:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+            .prev {
+                left: 10px;
+            }
+
+            .next {
+                right: 10px;
+            }
+
+            .containerProdutos {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .produto {
+                width: 23%; /* Ajusta el ancho según tus necesidades y deja espacio para los márgenes */
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .center-container {
+                text-align: center;
+            }
+        </style>
+        
     </head>
     <body>
-        <div>Holagente</div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Proyecto</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mas vendidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ofertas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Carrito</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="productos.html">Cámaras</a></li>
+                            <li><a class="dropdown-item" href="#">Routers</a></li>
+                            <li><a class="dropdown-item" href="#">Cámaras Wifi</a></li>  
+                        </ul>
+                    </li>
+
+                    <form class="d-flex" role="search">
+                        <div class="dropdown">
+                            <button class="profile-button">
+                                <i class="fas fa-user profile-icon"></i> Perfil
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="perfil.html">Perfil</a>
+                                <a href="#">Ajustes</a>
+                                <a href="metodos_pago.html">Metodos de pago</a>
+                            </div>
+                        </div>
+                        <a> </a>
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+            </div>
+        </nav>
+
+
+        <div class="banner-container">
+            <button class="arrow prev" onclick="prevSlide()">&#9665;</button>
+            <div class="banner">
+                <img src="https://media.nidux.net/pull/700/700/10349/1862-product-633d9eca2c2c6-ds2ce17d0tit3fs28.png" width=400 height=200 alt="Imagen 1">
+                <img src="https://media.nidux.net/pull/700/700/10349/756-product-5d5dc2b52c10d-thcb120mc28-1.jpg" width=400 height=200 alt="Imagen 2">
+                <img src="https://media.nidux.net/pull/700/700/10349/1875-product-635c0d822fa26-c6-1.png" width=400 height=200 alt="Imagen 3">
+
+            </div>
+            <button class="arrow next" onclick="nextSlide()">&#9655;</button>
+        </div>
+
+        <script>
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                const banner = document.querySelector('.banner');
+                const slideWidth = document.querySelector('.banner img').clientWidth;
+
+                currentSlide = index;
+
+                banner.style.transform = `translateX(${-index * slideWidth}px)`;
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + 3) % 3; // 3 es el número total de imágenes
+                showSlide(currentSlide);
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % 3; // 3 es el número total de imágenes
+                showSlide(currentSlide);
+            }
+        </script>
+        <div class="center-container">
+            <h2>Mas vendidos</h2>
+        </div>
+        <section class="containerProdutos">
+            <div class="produto">
+                <img src="https://media.nidux.net/pull/700/700/10349/2103-product-647f586a28038-eb3-07.png" width=200 height=200 alt="" class="produto__img">
+                <div class="productDescription">
+                    <h3 class="produto__title">EB3 2K - Cámara bullet wifi exteriores batería</h3>
+                    <spam class="produto__price">$90.00</spam>
+                </div>
+
+            </div>
+            <div class="produto">
+                <img src="https://media.nidux.net/pull/700/700/10349/2102-product-647f57b72ac56-h8c-1.png" width=200 height=200 alt="" class="produto__img">
+                <div class="productDescription">
+                    <h3 class="produto__title"> H8C - Cámara PT 1080P, H.265, 350° horizontal y 80° de vertical, visión nocturna </h3>
+                    <spam class="produto__price">$90.00</spam>
+                </div>
+
+            </div>
+            <div class="produto">
+                <img src="https://media.nidux.net/pull/700/700/10349/2101-product-647f5523c8048-h3-3k-0.png" width=200 height=200 alt="" class="produto__img">
+                <div class="productDescription">
+                    <h3 class="produto__title">H3 3K Cámara wifi exterior 3K</h3>
+                    <spam class="produto__price">$90.00</spam>
+                </div>
+
+            </div>
+            <div class="produto">
+                <img src="https://media.nidux.net/pull/700/700/10349/2094-product-6463e484ca2ff-cs-h8-r100-1j5wkfl-01.jpeg" width=200 height=200 alt="" class="produto__img">
+                <div class="productDescription">
+                    <h3 class="produto__title">CS-H8-R100-1J5WKFL </h3>
+                    <spam class="produto__price">$90.00</spam>
+                </div>
+            </div>
+        </section>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+
+        <footer style="background-color: #333; color: white; text-align: left; padding: 20px;">
+            <div class="footer-content">
+                <div class="left-content">Redes Sociales</div>
+                <div class="center-content">
+                    <a href="https://instagram.com/sekunet_cr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/sekunet?mibextid=LQQJ4d" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+
     </body>
 </html>
