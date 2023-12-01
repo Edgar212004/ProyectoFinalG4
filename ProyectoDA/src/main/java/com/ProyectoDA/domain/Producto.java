@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Entity
@@ -95,6 +96,7 @@ public class Producto {
         this.usuario = usuario;
     }
 
+    @PostMapping("/save")
     @Override
     public String toString() {
         return "Producto{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", imagen=" + imagen + ", precio=" + precio + ", cantidad=" + cantidad + ", usuario=" + usuario + '}';

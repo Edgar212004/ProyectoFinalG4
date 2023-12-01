@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @Table(name = "ordenes")
 public class Orden {
-    
+       
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
