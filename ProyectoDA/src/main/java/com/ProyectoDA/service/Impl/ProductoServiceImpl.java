@@ -3,6 +3,7 @@ package com.ProyectoDA.service.Impl;
 import com.ProyectoDA.dao.ProductoDao;
 import com.ProyectoDA.domain.Producto;
 import com.ProyectoDA.service.ProductoService;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductoServiceImpl implements ProductoService{
     
-      @Autowired
+    @Autowired
     private ProductoDao productoDao;
     
     @Override
@@ -32,5 +33,9 @@ public class ProductoServiceImpl implements ProductoService{
     public void delete(Integer id) {
         productoDao.deleteById(id);
     }  
-    
+
+    @Override
+    public List<Producto> findAll() {
+        return productoDao.findAll();
+    } 
 }

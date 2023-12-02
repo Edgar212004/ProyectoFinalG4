@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "ordenes")
 public class Orden {
        
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
@@ -99,6 +99,6 @@ public class Orden {
     public String toString() {
         return "Orden{" + "id=" + id + ", nombre=" + nombre + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida=" + fechaRecibida + ", total=" + total + '}';
     }
-    
+       
 }
 
