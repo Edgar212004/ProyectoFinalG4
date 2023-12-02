@@ -107,5 +107,19 @@ public class ProductoController {
         productoService.delete(id);
         return "redirect:/productos";
     }
+    
+    @GetMapping ("/camaras")
+    public String camaras(){
+        return "productos/camaras";
+    }
 
+    @GetMapping("/routers")
+    public String routers() {
+        return "productos/routers";
+    }
+    
+    @GetMapping("/camarasWifi")
+    public String camarasWifi() {
+        return "productos/camarasWifi";
+    }
 }
