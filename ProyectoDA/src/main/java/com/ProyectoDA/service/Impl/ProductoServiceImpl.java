@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductoServiceImpl implements ProductoService{
-    
+
     @Autowired
     private ProductoDao productoDao;
     
@@ -37,5 +37,5 @@ public class ProductoServiceImpl implements ProductoService{
     @Override
     public List<Producto> findAll() {
         return productoDao.findAll();
-    } 
+    }
 }

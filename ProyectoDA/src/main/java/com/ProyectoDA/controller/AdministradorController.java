@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/administrador")
 public class AdministradorController {
-    
-@Autowired
+   
+    @Autowired
     private ProductoService productoService;
     
     @GetMapping("")
@@ -23,5 +23,5 @@ public class AdministradorController {
         model.addAttribute("productos", productos);
         
         return "administrador/home";
-    }   
+    }
 }

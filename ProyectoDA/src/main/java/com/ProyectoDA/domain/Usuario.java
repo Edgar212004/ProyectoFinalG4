@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "usuarios")
 public class Usuario {
     
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //Atributos
     private Integer id;
@@ -134,5 +134,5 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", username=" + username + ", email=" + email + ", direccion=" + direccion + ", telefono=" + telefono + ", tipo=" + tipo + ", password=" + password + '}';
     }
-    
+
 }
