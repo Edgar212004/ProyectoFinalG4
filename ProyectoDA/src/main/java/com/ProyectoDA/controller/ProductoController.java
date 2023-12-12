@@ -5,6 +5,8 @@ import com.ProyectoDA.domain.Producto;
 import com.ProyectoDA.domain.Usuario;
 import com.ProyectoDA.service.ProductoService;
 import com.ProyectoDA.service.UploadFileService;
+import com.ProyectoDA.service.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 import org.slf4j.*;
@@ -28,6 +30,9 @@ public class ProductoController {
     private ProductoService productoService;
     
     @Autowired
+    private UsuarioService usuarioService;
+    
+    @Autowired
     private UploadFileService upload;
     
     @GetMapping("")
@@ -43,9 +48,9 @@ public class ProductoController {
     }
     
     @PostMapping("/save")
-    public String save(Producto producto, @RequestParam("img") MultipartFile file) throws IOException{
+    public String save(Producto producto, @RequestParam("img") MultipartFile file, HttpSession session) throws IOException{
         LOGGER.info("Este es el objeto producto {}",producto);
-        Usuario u = new Usuario(1, "", "", "", "", "", "", "");
+        Usuario u = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
         producto.setUsuario(u);
         
         //Imagen

@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Proyecto</title>
+  <title>Empresa</title>
 
 
   <!-- Bootstrap core CSS -->
@@ -23,14 +23,17 @@
 <body>
 
   <!-- Navigation -->
-  <div th:replace="usuario/user.html :: header"></div>
+  <div th:include="~{usuario/user.html :: header}" th:if="${sesion==null}"></div>
+  
+  <div th:include="~{usuario/user.html :: header-user}" th:unless="${sesion==null}"></div>
+
 
     <!-- Page Content -->
     <div class="container">
 
       <!-- Jumbotron Header -->
       <header class="jumbotron my-4">
-        <h1 class="display-3">Todo la informacion en este espacio</h1>
+        <h1 class="display-3">Bienvenido a la Empresa</h1>
         <p class="lead">Tu tienda de productos en Línea</p>
       </header>
 

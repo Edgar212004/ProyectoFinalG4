@@ -1,6 +1,5 @@
 
 package com.ProyectoDA.controller;
-
 import com.ProyectoDA.domain.DetalleOrden;
 import com.ProyectoDA.domain.Orden;
 import com.ProyectoDA.domain.Producto;
@@ -9,6 +8,7 @@ import com.ProyectoDA.service.DetalleOrdenService;
 import com.ProyectoDA.service.OrdenService;
 import com.ProyectoDA.service.ProductoService;
 import com.ProyectoDA.service.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,11 +50,14 @@ public class HomeController {
     Orden orden = new Orden();
     
     
-    @GetMapping
-    public String home(Model model){
+    @GetMapping("")
+    public String home(Model model, HttpSession session){
+        
+        log.info("Session del usuario: {}", session.getAttribute("idusuario"));     
         
         model.addAttribute("productos", productoService.findAll());
-        
+        //Session
+        model.addAttribute("sesion", session.getAttribute("idusuario"));
         return "usuario/home";
     }
     
@@ -136,18 +139,20 @@ public class HomeController {
     }
     
     @GetMapping("/getCart")
-    public String getCart(Model model){
+    public String getCart(Model model, HttpSession session){
         
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
         
+        //sesion
+        model.addAttribute("sesion",session.getAttribute("idusuario"));
         return "/usuario/carrito";
     }
     
     @GetMapping("/order")
-    public String order(Model model){
+    public String order(Model model, HttpSession session){
         
-        Usuario usuario = usuarioService.findById(1).get();
+        Usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
         
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
@@ -158,24 +163,24 @@ public class HomeController {
     
     //Guardar la orden
     @GetMapping("/saveOrder")
-    public String saveOrder(){
+    public String saveOrder(HttpSession session){
         Date fechaCreacion = new Date();
         orden.setFechaCreacion(fechaCreacion);
         orden.setNumero(ordenService.generarNumeroOrden());
         
         //usuario
-        Usuario usuario = usuarioService.findById(1).get();
+        Usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
         
         orden.setUsuario(usuario);
         ordenService.save(orden);
         
-        //Guadar detalles
+        //Guadar detalles de la orden
         for(DetalleOrden dt:detalles){
             dt.setOrden(orden);
             detalleOrdenService.save(dt);
         }
         
-        //Limpiar lista 
+        //Limpiar lista y orden
         orden = new Orden();
         detalles.clear();
         

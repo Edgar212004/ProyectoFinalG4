@@ -3,9 +3,11 @@ package com.ProyectoDA.service.Impl;
 
 import com.ProyectoDA.dao.OrdenDao;
 import com.ProyectoDA.domain.Orden;
+import com.ProyectoDA.domain.Usuario;
 import com.ProyectoDA.service.OrdenService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,4 +56,15 @@ public class OrdenServiceImpl implements OrdenService{
         return numeroConcatenado;
     }
 
+    @Override
+    public List<Orden> findByUsuario(Usuario usuario) {
+        return ordenDao.findByUsuario(usuario);
+    }
+
+    @Override
+    public Optional<Orden> findById(Integer id) {
+        return ordenDao.findById(id);
+    }
+
 }
+
